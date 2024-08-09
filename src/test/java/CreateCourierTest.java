@@ -72,7 +72,7 @@ public class CreateCourierTest {
     public void createCourierWithExistingLogin() {
         courier = new Courier("test_login_" + System.currentTimeMillis(), "test_password", "test_first_name");
 
-        // Create courier
+        // Создаем курьера
         given()
                 .header("Content-type", "application/json")
                 .and()
@@ -82,7 +82,7 @@ public class CreateCourierTest {
                 .then()
                 .statusCode(201).body("ok", equalTo(true));
 
-        // Try to create courier with the same login
+        // Пытаемся создать курьера с таким же логином
         given()
                 .header("Content-type", "application/json")
                 .and()
@@ -90,8 +90,10 @@ public class CreateCourierTest {
                 .when()
                 .post("/courier")
                 .then()
-                .statusCode(409);
+                .statusCode(409)
+                .body("message", equalTo("Этот логин уже используется"));       // Тест падает, поскольку в https://qa-scooter.praktikum-services.ru/docs/#api-Courier-CreateCourier другое body
     }
+
 
     @Test
     @DisplayName("Create Courier without Login")

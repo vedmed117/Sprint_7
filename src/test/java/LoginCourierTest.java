@@ -52,7 +52,7 @@ public class LoginCourierTest {
 
     @Test
     @DisplayName("Login Courier with Missing Fields")
-    @Description("This test logs in a courier with missing fields and verifies the response")
+    @Description("This test logs in a courier with missing fields and verifies the response")   // Ссылка на документацию: https://qa-scooter.praktikum-services.ru/docs/#api-Courier-Login
     public void loginCourierWithMissingFields() {
         ValidatableResponse response = loginCourier(new Courier(courierLogin, null));
         response.statusCode(400).body("message", equalTo("Недостаточно данных для входа"));
